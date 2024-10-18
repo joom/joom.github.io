@@ -7,16 +7,16 @@
     <base target="_blank">
     <script>
       document.addEventListener("DOMContentLoaded", (event) => {
-        window.scrollTo(0, document.body.scrollHeight)
+        window.scrollTo(0, 0)
         let bbox = document.querySelector("#me").getBBox()
-        let x = bbox.x + bbox.width;
-        window.scrollBy(x, 0)
+        let x = bbox.x + (bbox.width - window.innerWidth) / 2
+        window.scrollBy(x, document.body.scrollHeight)
       })
     </script>
   </head>
   <body>
     <div id="graph" style="text-align: center;">
-      <svg width="4419pt" height="4278pt" viewBox="0.00 0.00 4419.31 4278.40" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <svg width="4419px" height="4278px" viewBox="0.00 0.00 4419.31 4278.40" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <defs>
           <style>
             .node text {
@@ -26,6 +26,10 @@
             }
             .node text a {
               text-decoration: underline;
+            }
+            .node text:nth-child(2) {
+              fill: #857769;
+              stroke-bottom:
             }
             .edge path {
               fill: none;
