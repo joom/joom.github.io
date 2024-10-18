@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>Joomy Korkut - Academic Ancestry</title>
+    <title>Academic Genealogy of Joomy Korkut</title>
     <base target="_blank">
     <script>
       document.addEventListener("DOMContentLoaded", (event) => {
@@ -11,11 +11,50 @@
         let bbox = document.querySelector("#me").getBBox()
         let x = bbox.x + (bbox.width - window.innerWidth) / 2
         window.scrollBy(x, document.body.scrollHeight)
+
+        document.querySelector('.box').innerHTML += `<span>×</span>`
+        document.querySelector('.box span').addEventListener("click", () => {
+          document.querySelector('.box').remove()
+        })
       })
     </script>
+    <style>
+      body {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      } 
+      .box {
+        width: 300px;
+        background-color: #555;
+        color: #fff;
+        text-align: left;
+        padding: 12px;
+        border-radius: 6px;
+        font-size: 80%;
+        line-height: 1.5;
+        position: fixed;
+        top: 5px;
+        left: 5px;
+      }
+
+      .box span {
+        position: absolute;
+        top: 0px;
+        right: 3px;
+        font-size: 15px;
+      }
+      .box span:hover {
+        cursor: pointer;
+      }
+      .box a {
+        color: white !important;
+      }
+    </style>
   </head>
   <body>
     <div id="graph" style="text-align: center;">
+      <span class="box">
+        This data is obtained with <a href="https://github.com/davidalber/geneagrapher">Geneagrapher</a> from the <a href="https://www.genealogy.math.ndsu.nodak.edu">Mathematics Genealogy Project</a>, exported to SVG through <a href="https://graphviz.org/">Graphviz</a>, and then hand-annotated with the Wikipedia links of the academics.
+      </span>
       <svg width="4419px" height="4278px" viewBox="0.00 0.00 4419.31 4278.40" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <defs>
           <style>
@@ -29,7 +68,6 @@
             }
             .node text:nth-child(2) {
               fill: #857769;
-              stroke-bottom:
             }
             .edge path {
               fill: none;
