@@ -81,6 +81,10 @@ a {
   text-decoration: none;
 }
 
+a.dark {
+  color: black;
+}
+
 a:hover {
   border-bottom: 2px solid #D97A00;
 }
