@@ -26,7 +26,7 @@
         </p>
 
         <p>
-        I am interested in compilers, type systems, and formal verification (especially with interactive theorem provers, such as <a href="https://coq.inria.fr/">Coq</a>). I am particularly interested in the applications of metaprogramming, property-based testing, and separation logic.
+        I am interested in functional programming languages, compilers, type systems, and formal verification (especially with interactive theorem provers, such as <a href="https://coq.inria.fr/">Coq</a> and <a href="https://agda.github.io/">Agda</a>). I am particularly interested in the applications of metaprogramming, property-based testing, and separation logic.
         </p>
 
         <p>
@@ -49,7 +49,7 @@
         <section>
           <h1>Written Work</h1>
           <ul>
-            <li>
+            <li class="dissertation">
               <a href="./papers/dissertation.pdf">Foreign Function Verification Through Metaprogramming</a>. Joomy Korkut. PhD dissertation. Princeton University. 2024.
               <br>
               <small>
@@ -76,7 +76,7 @@
               </small>
             </li>
             <li>
-              <a href="./papers/ottoman.pdf">Morphology and Lexicon-based Machine Translation of Ottoman Turkish to Modern Turkish</a>. Joomy Korkut. Unpublished draft, 2019.
+              <a href="./papers/ottoman.pdf">Morphology and Lexicon-based Machine Translation of Ottoman Turkish to Modern Turkish</a>. Joomy Korkut. Unpublished draft, 2019.<span class="tooltip" id="ottoman-tooltip"><a href="./others/lost-in-translation.pdf"><b>*</b></a></span>
               <br>
               <small>
                 <a href="https://github.com/joom/dilacar">[Haskell code]</a>
@@ -168,6 +168,10 @@
           document.querySelector("#genealogy-tooltip").innerHTML +=
             (`<span class="tooltiptext">
                 My <a href="./others/academic-genealogy.html">academic genealogy graph</a> includes Gauss, Euler, Leibniz, Copernicus, and goes all the way back to Omar Khayyam and Avicenna!
+              </span>`)
+          document.querySelector("#ottoman-tooltip").innerHTML +=
+            (`<span class="tooltiptext">
+                <a href="./others/lost-in-translation.pdf">An article mentioning this work</a> appeared on the Fall 2021 edition of the Princeton International Magazine.
               </span>`)
         </script>
     </div>
