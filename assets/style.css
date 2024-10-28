@@ -169,6 +169,7 @@ img.photo {
 .dissertation {
   background: #f5f2ec;
   border: 1px #857769 solid;
+  padding: 2px;
   padding-top: 5px;
   padding-bottom: 5px;
 }
