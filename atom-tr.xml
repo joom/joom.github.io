@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>joomy's blog</title>
+    <link href="http://joomy.korkutblech.com/atom-tr.xml" rel="self" />
+    <link href="http://joomy.korkutblech.com" />
+    <id>http://joomy.korkutblech.com/atom-tr.xml</id>
+    <author>
+        <name>Joomy Korkut</name>
+        <email>joomy@type.systems</email>
+    </author>
+    <updated>2024-10-28T00:00:00Z</updated>
+    <entry>
+    <title>İlk yazı</title>
+    <link href="http://joomy.korkutblech.com/yazilar/2024-10-28-ilk-yazi.html" />
+    <id>http://joomy.korkutblech.com/yazilar/2024-10-28-ilk-yazi.html</id>
+    <published>2024-10-28T00:00:00Z</published>
+    <updated>2024-10-28T00:00:00Z</updated>
+    <summary type="html"><![CDATA[Bir giriş yazısı.]]></summary>
+</entry>
+
+</feed>

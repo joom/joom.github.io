@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Joomy Korkut - The diacritic omission phenomenon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="joomy,cumhur,korkut,haskell,coq,idris,wesleyan,princeton,metaprogramming,compiler,formal,verification,verified,certified,programming,bloomberg,turkish,turkey" />
+    <!-- <base target="_blank"> -->
+    <link rel="stylesheet" type="text/css" href="../assets/style.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/syntax.css" />
+    <link rel="icon" href="../assets/favicon.ico">
+    <link rel="alternate" type="application/rss+xml" title="Joomy's web site and blog" href="http://joomy.korkutblech.com/atom.xml" />
+    <meta name="author" content="Joomy Korkut">
+    <meta name="description" content="Joomy's web site and blog." />
+    <!-- Schema.org markup for Google+ -->
+    <meta itemprop="name" content="Joomy Korkut">
+    
+      <meta itemprop="description" content="Omitting the diacritics is a common phenomenon in languages such as Turkish and Serbo-Croatian. Then why isn't there any research on this?">
+    
+    <meta itemprop="image" content="/assets/icon.png">
+
+    <!-- Open Graph data -->
+    <meta property="og:title" content="The diacritic omission phenomenon" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="http://joomy.korkutblech.com/" />
+    <meta property="og:image" content="http://joomy.korkutblech.com/assets/icon.png" />
+    
+      <meta property="og:description" content="Omitting the diacritics is a common phenomenon in languages such as Turkish and Serbo-Croatian. Then why isn't there any research on this?">
+    
+    <meta property="og:site_name" content="Joomy Korkut" />
+    
+    <script src="../assets/page.js"></script>
+  </head>
+  <body>
+    <div class="header">
+  <section>
+    <h1 class="to-right"><a href="../">Home page</a> | <a href="javascript:history.back()">Back</a></h1>
+  </section>
+  <div class="title">
+    Joomy Korkut's blog
+  </div>
+  <div class="title">
+    <a href="../posts/2017-11-18-diacritic-omission.html">The diacritic omission phenomenon</a>
+  </div>
+  <div class="subtitle">
+      Posted on November 18, 2017,
+      
+        tags: <a href="../tags/language.html">language</a>, <a href="../tags/turkish.html">turkish</a>
+      
+  </div>
+</div>
+<div class="content">
+  <p>Languages that have recently switched to Latin alphabet usually employ a higher number of diacritics to cover all the phonemes. Turkish has <em>ç</em>, <em>ş</em>, <em>ğ</em>, <em>ı</em> (upper case <em>I</em>), <em>i</em> (upper case <em>İ</em>), <em>ö</em>, <em>ü</em>. Serbo-Croatian (or Bosnian and Croatian in this case) has <em>č</em>, <em>ć</em>, <em>dž</em>, <em>đ</em>, <em>š</em>, <em>ž</em>. Polish, despite not switching recently, has <em>ą</em>, <em>ć</em>, <em>ę</em>, <em>ł</em>, <em>ń</em>, <em>ó</em>, <em>ś</em>, <em>ź</em>, <em>ż</em>. In this blog post, I’ll mostly talk about Turkish since I’m a native speaker of it, but some of the observations here occur in Serbo-Croatian and Polish as well, in varying degrees.</p>
+<p>The phenomenon I’ll describe is the omission of diacritics in typing. In Turkish, <em>ç</em> would become <em>c</em>, <em>ş</em> would become <em>s</em>, <em>ğ</em> would become <em>g</em>, <em>ı</em> and <em>i</em> would both become <em>i</em>, <em>ö</em> would become <em>o</em>, and <em>ü</em> would become <em>u</em>. Especially in the age of text messages on phones that did not support characters with diacritics, most people are used to typing with their closest <a href="https://en.wikipedia.org/wiki/ASCII">ASCII</a> equivalents, which means all diacritics got removed.</p>
+<p>Similarly, in the early days of Turkish internet sphere, when displaying Turkish characters was non-trivial, most web sites also didn’t allow input in Turkish characters. One of the most significant examples of this is <a href="https://en.wikipedia.org/wiki/Ek%C5%9Fi_S%C3%B6zl%C3%BCk">Ekşi Sözlük</a>, a unique social media web site from 1999 that is still very active today. Their solution was to replace <em>ş</em> with the <em>$</em> symbol, even in their logo and in all the texts, until the Turkish character support got stable on the web.</p>
+<p>Now we have smartphones that can easily change different keyboards and that support Unicode characters, the number of people who type without diacritics is dropping. However if one doesn’t have a Turkish keyboard on their computer (like me), they would still have to type without Turkish characters. Moreover, there is a lot of Turkish text written without the diacritics for the reasons mentioned above. This raises a number of interesting linguistic questions for me.</p>
+<h1 id="ambiguity-and-disambiguation">Ambiguity and disambiguation</h1>
+<p>The problem with the diacritic omission is that Turkish already has distinct letters <em>c</em>, <em>s</em>, <em>g</em>, <em>i</em>, <em>o</em> and <em>u</em>, which means those letters would now be overloaded with two phonemes. One can usually infer what the actual word. For example, there is no such word as “catal”, so it has to be “çatal” (fork). However, it’s not all clear in some other cases.</p>
+<p>The most (in)famous case of ambiguity is the distinction between “sıkıldım” (I am bored) and “sikildim” (I got f’ed). Unfortunately it’s not only a lewd cliché joke; <a href="https://gizmodo.com/382026/a-cellphones-missing-dot-kills-two-people-puts-three-more-in-jail">two people died because of this confusion back in 2008</a>. One way to resolve the ambiguity in typing is to rely on vowel harmony. Since Turkish is an agglutinative language and suffixes can take different forms depending on the preceding vowel, other grammatical forms of the words above differ. For example, the infinitive forms “sıkılmak” (to be bored) and “sikilmek” (to get f’ed) differ by the last vowel. So even if the former word is spelled without diacritics, the reader can infer the meaning and pronunciation from the ending.</p>
+<p>Here are some other pairs of words that are hard to disambiguate when spelled without diacritics:</p>
+<ul>
+<li><em>acı (pain)</em>, <em>açı</em> (angle)</li>
+<li><em>acil </em>(urgent), <em>açıl</em> (open up)</li>
+<li><em>hali </em>(state, condition), <em>halı</em> (carpet)</li>
+<li>kustu (threw up), küstü (offended by someone) (<a href="https://twitter.com/MelisaOlgun/status/932110828366651392">thanks Melisa</a>)</li>
+</ul>
+<p>There are probably many more examples that I cannot think of right now. Feel free to comment if you have any interesting examples in mind.</p>
+<h1 id="how-is-this-relevant-to-linguistics">How is this relevant to linguistics?</h1>
+<p>As far as I know, there is very little, if any, linguistic work on this phenomenon. There is a software called “Turkish text deasciifier” that takes Turkish text written without diacritics and tries to add diacritics.<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> It is surprisingly successful, however it tries to disambiguate on based on a patterns table. I personally use this tool when I absolutely need to type something in proper Turkish.</p>
+<p>Another topic that interests me greatly is, how well do we understand text written without diacritics? How does it affect our speed of comprehension? Does it differ according to ages? Is it something that is learned, or can someone who has seen such a text for the first time understand it easily? How much difficulty do the non-native speakers of the language have with texts without diacritics? Especially if they are reading the text out loud, they have to know all the words and the vowel harmony rules by heart. Considering <a href="https://en.wikipedia.org/wiki/Longest_word_in_Turkish">Turkish can have really long words</a> like <em>Çekoslovakyalılaştıramadıklarımızdanmışsınız</em>, seeing it without diacritics, in the form <em>Cekoslovakyalilastiramadiklarimizdanmissiniz</em>, requires the reader to mentally parse the word before reading.</p>
+<p>A relevant question is, what about the writing systems that have the extra letters but often don’t use them, even in formal writing? For example, Russian spelling often replaces <em>ё</em> (yo) with <em>е</em> (ye/e), even in newspapers. Ottoman Turkish had ك (k), گ (g) and ڭ (nasal n) but usually they were all just spelled as ك (the first one). How is the comprehension speed affected then?</p>
+<p>I’m curious about these questions and I’d really like to read more about how diacritics affect comprehension, and how it affects non-native speakers. I also wouldn’t mind seeing how far machine learning can be taken to disambiguate such texts.</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Originally developed by Gökhan Tür, later inspired an open-source version developed by Deniz Yüret, which is then ported to many programming languages as executables, libraries and editor modes. (<a href="https://github.com/emres/turkish-mode">Emacs Lisp</a>, <a href="https://github.com/joom/turkish-deasciifier.vim">Vim</a>, <a href="https://github.com/emres/turkish-deasciifier">Python</a>, <a href="https://github.com/ahmetalpbalkan/turkish-deasciifier-java">Java</a>, <a href="https://github.com/dbarisakkurt/turkish-deasciifier">Scala</a>, <a href="https://github.com/f/deasciifier">JavaScript</a>, <a href="https://github.com/joom/turkish-deasciifier.hs">Haskell</a>, <a href="https://github.com/ayberkt/deasciifier">Swift</a>)<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+</div>
+
+  </body>
+</html>

@@ -30,6 +30,9 @@ body {
   line-height: 125%;
   color: #857769;
 }
+.gray {
+  color: #857769;
+}
 
 .content {
   margin-top: 40pt
@@ -167,9 +170,18 @@ img.photo {
 }
 
 .dissertation {
-  background: #f5f2ec;
-  border: 1px #857769 solid;
+  background: #fffdf9;
+  border: 0.5px #857769 solid;
   padding: 2px;
   padding-top: 5px;
   padding-bottom: 5px;
+}
+
+.flag {
+  border-bottom: 0px;
+}
+
+.to-right {
+  float: right;
+  text-align: right;
 }

@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Joomy Korkut - Starting a Haskell student forum at Wesleyan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="joomy,cumhur,korkut,haskell,coq,idris,wesleyan,princeton,metaprogramming,compiler,formal,verification,verified,certified,programming,bloomberg,turkish,turkey" />
+    <!-- <base target="_blank"> -->
+    <link rel="stylesheet" type="text/css" href="../assets/style.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/syntax.css" />
+    <link rel="icon" href="../assets/favicon.ico">
+    <link rel="alternate" type="application/rss+xml" title="Joomy's web site and blog" href="http://joomy.korkutblech.com/atom.xml" />
+    <meta name="author" content="Joomy Korkut">
+    <meta name="description" content="Joomy's web site and blog." />
+    <!-- Schema.org markup for Google+ -->
+    <meta itemprop="name" content="Joomy Korkut">
+    
+      <meta itemprop="description" content="I will be giving lectures on Functional Programming in Haskell next semester.">
+    
+    <meta itemprop="image" content="/assets/icon.png">
+
+    <!-- Open Graph data -->
+    <meta property="og:title" content="Starting a Haskell student forum at Wesleyan" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="http://joomy.korkutblech.com/" />
+    <meta property="og:image" content="http://joomy.korkutblech.com/assets/icon.png" />
+    
+      <meta property="og:description" content="I will be giving lectures on Functional Programming in Haskell next semester.">
+    
+    <meta property="og:site_name" content="Joomy Korkut" />
+    
+    <script src="../assets/page.js"></script>
+  </head>
+  <body>
+    <div class="header">
+  <section>
+    <h1 class="to-right"><a href="../">Home page</a> | <a href="javascript:history.back()">Back</a></h1>
+  </section>
+  <div class="title">
+    Joomy Korkut's blog
+  </div>
+  <div class="title">
+    <a href="../posts/2015-06-01-haskell-wesleyan.html">Starting a Haskell student forum at Wesleyan</a>
+  </div>
+  <div class="subtitle">
+      Posted on June  1, 2015,
+      
+        tags: <a href="../tags/haskell.html">haskell</a>, <a href="../tags/wesleyan.html">wesleyan</a>, <a href="../tags/teaching.html">teaching</a>
+      
+  </div>
+</div>
+<div class="content">
+  <p>I recently learned that the student forum proposal <a href="http://twitter.com/MaximumDietz">Max Dietz</a> and I wrote was accepted, which means that Max and I will be giving lectures on Functional Programming in Haskell in Fall 2015 semester.</p>
+<p>Just in case the concept of a student forum is unclear, I should explain it. A <a href="http://www.wesleyan.edu/registrar/enrollment/student_forum.html">student forum at Wesleyan</a> is a course for credit that is based on discussions led by students. In a class like this, we plan to have a lecture based routine.</p>
+<p>Even though the initial plan was accepted, I think it would be a good idea to share the syllabus with the Haskell community and review the topics that we are going to talk about in class. Here we go:</p>
+<hr />
+<h2 id="student-forum-proposal-functional-programming-in-haskell-computer-science-course">Student Forum Proposal: Functional Programming in Haskell (Computer Science Course)</h2>
+<h3 id="description-purpose-and-rationale">Description, purpose and rationale</h3>
+<p>This class is an advanced course to learn advanced and real-life functional programming in Haskell. At the end of the class, students will have fluent knowledge of the Haskell programming language, and they will be able to write libraries, command line and web applications in Haskell.</p>
+<p>This student forum is supposed to build on COMP212 Computer Science II. Hence, it will be assumed that the students have a working knowledge of Standard ML and basic functional programming concepts such as immutability and higher-order functions. This will allow the class to move faster on concepts like pattern matching, static typing, parametric polymorphism, type inference etc. and have more interesting material towards the end of the course.</p>
+<h3 id="topics-to-be-discussed-assignments-and-reading-list">Topics to be discussed, assignments and reading list</h3>
+<p>Certain parts of the course will be based on <a href="http://www.seas.upenn.edu/~cis194/spring13/lectures.html">UPenn CIS 194</a>. “Real World Haskell” can be a good reading material for the course, since it moves faster than other books. “Learn You a Haskell” is another good book that we can use in certain areas, since it follows a more step-by-step approach.</p>
+<h3 id="weekly-plan-of-the-course">Weekly plan of the course</h3>
+<table style="width:48%;">
+<colgroup>
+<col width="8%" />
+<col width="10%" />
+<col width="12%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Week</th>
+<th align="left">Topic</th>
+<th align="left">Reading</th>
+<th align="left">Assignment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">Haskell syntax and base types</td>
+<td align="left">Learn Haskell Fast and Hard</td>
+<td align="left">-</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">Algebraic data types, records, pattern matching, lazy evaluation</td>
+<td align="left"><a href="http://book.realworldhaskell.org/read/defining-types-streamlining-functions.html">RWH Ch. 3</a></td>
+<td align="left">Implementation of a priority queue</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">Higher-order functions, point-free style, type classes</td>
+<td align="left">-</td>
+<td align="left">Adding certain type classes (Monoid, Foldable) to the priority queue</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">Modules, Cabal basics.</td>
+<td align="left"><a href="http://learnyouahaskell.com/modules">LYAH Ch. 7</a></td>
+<td align="left">Converting the priority queue into a Cabal project with abstract types</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left">Input and output (IO monad)</td>
+<td align="left"><a href="http://learnyouahaskell.com/input-and-output">LYAH Ch. 9</a></td>
+<td align="left">Write a command line tool.</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="left">Functors, applicative functors and monads</td>
+<td align="left"><a href="http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html">Functors, Applicative Functors and Monads in Pictures</a>, <a href="http://learnyouahaskell.com/a-fistful-of-monads">LYAH Ch. 12</a></td>
+<td align="left">Implement a monad to keep the score in a game, write a simple game with it.</td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="left">Reader, Writer, State monads</td>
+<td align="left"><a href="http://adit.io/posts/2013-06-10-three-useful-monads.html">Three Useful Monads</a>, <a href="http://learnyouahaskell.com/for-a-few-monads-more">LYAH Ch. 13</a></td>
+<td align="left">Update the game to use the monads learned this week.</td>
+</tr>
+<tr class="even">
+<td align="left">8</td>
+<td align="left">Monad transformers</td>
+<td align="left"><a href="https://github.com/kqr/gists/blob/master/articles/gentle-introduction-monad-transformers.md">A Gentle Introduction to Monad Transformers</a></td>
+<td align="left">Add error handling with monad transformers to the game.</td>
+</tr>
+<tr class="odd">
+<td align="left">9</td>
+<td align="left">Parser combinators (Parsec)</td>
+<td align="left"><a href="https://www.fpcomplete.com/school/starting-with-haskell/basics-of-haskell/10_Error_Handling">Error Handling - FP Complete</a>, <a href="http://book.realworldhaskell.org/read/using-parsec.html">RWH Ch. 16</a></td>
+<td align="left">Writing a basic HTML or XML parser</td>
+</tr>
+<tr class="even">
+<td align="left">10</td>
+<td align="left">Property-based testing with QuickCheck</td>
+<td align="left"><a href="http://book.realworldhaskell.org/read/testing-and-quality-assurance.html">RWH Ch. 11</a></td>
+<td align="left">For two topological sort programs (one correct, one incorrect) write QuickCheck tests to find the minimal counterexample.</td>
+</tr>
+<tr class="odd">
+<td align="left">11</td>
+<td align="left">Lenses</td>
+<td align="left"><a href="https://www.fpcomplete.com/school/to-infinity-and-beyond/pick-of-the-week/a-little-lens-starter-tutorial">A Little Lens Starter Tutorial</a></td>
+<td align="left">Change your command line game to use lenses.</td>
+</tr>
+<tr class="even">
+<td align="left">12</td>
+<td align="left">Yesod</td>
+<td align="left"><a href="http://www.yesodweb.com/book">Yesod Book (as a reference)</a></td>
+<td align="left">Basic website with CRUD.</td>
+</tr>
+<tr class="odd">
+<td align="left">13</td>
+<td align="left">Template Haskell</td>
+<td align="left"><a href="https://www.fpcomplete.com/user/marcin/template-haskell-101">Template Haskell 101</a>, <a href="https://ocharles.org.uk/blog/guest-posts/2014-12-22-template-haskell.html">24 Days of GHC Extensions</a></td>
+<td align="left">Use TH to create a <a href="https://www.fpcomplete.com/user/Geraldus/algebraic-data-types-adts-with-aeson">toJson</a> function for basic ADTs</td>
+</tr>
+<tr class="even">
+<td align="left">14</td>
+<td align="left">Other Language Extensions, working on projects.</td>
+<td align="left">-</td>
+<td align="left">Final Project</td>
+</tr>
+</tbody>
+</table>
+<h3 id="the-method-of-evaluation-of-the-work">The method of evaluation of the work</h3>
+<p>There are going to be weekly assignments for the students that will be graded by the student leaders, also using automated tests if possible. Code will be graded upon not only compilation and that it fulfills the specifications, but also that it makes good use of Haskell and FP style. The goal is that by having students complete both simple Haskell code assignment and assignments that involve utilizing Haskell libraries they will feel comfortable using functional programming and Haskell in their future projects.</p>
+<h3 id="the-role-of-the-faculty-advisor">The role of the faculty advisor</h3>
+<p>Students will consult <a href="http://jlipton.web.wesleyan.edu">Prof. James Lipton</a> on the workload of the class, the grading policies, possible assignments and reading material.</p>
+<p>Also, <a href="http://dlicata.web.wesleyan.edu/">Prof. Dan Licata</a> was very nice to accept our suggestion to give a guest lecture on <a href="https://ghc.haskell.org/trac/ghc/wiki/ViewPatterns">view patterns</a>, which he implemented.</p>
+<hr />
+<p>This was the syllabus. If you have any comments, suggestions or criticisms, please let us know. Some of the topics we decided to talk about are not essential (such as Template Haskell) and even controversial. (ahem. lenses. ahem.) We would like to hear your opinion on that. Also, we are open to new homework assignment ideas. Current assignments are not very specific, and we tried to have a reasonable amount of workload for students by keeping the number of time consuming assignments low and having concise assignments in other weeks.</p>
+</div>
+
+  </body>
+</html>
