@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Joomy Korkut - Intrinsic vs. extrinsic verification</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="joomy,cumhur,korkut,haskell,coq,agda,idris,wesleyan,princeton,metaprogramming,compiler,formal,verification,verified,certified,programming,bloomberg,turkish,turkey" />
+    <link rel="stylesheet" type="text/css" href="../assets/style.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/syntax.css" />
+    <link rel="icon" href="../assets/favicon.ico">
+    <link rel="alternate" type="application/rss+xml" title="Joomy's web site and blog" href="http://joomy.korkutblech.com/atom.xml" />
+    <meta name="author" content="Joomy Korkut">
+    <meta name="description" content="Joomy's web site and blog." />
+    <!-- Schema.org markup for Google+ -->
+    <meta itemprop="name" content="Joomy Korkut">
+    
+      <meta itemprop="description" content="Tracing the origin of the terms " intrinsic" and "extrinsic" in formal verification and programming languages.">
+    
+    <meta itemprop="image" content="/assets/icon.png">
+
+    <!-- Open Graph data -->
+    <meta property="og:title" content="Intrinsic vs. extrinsic verification" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="http://joomy.korkutblech.com/" />
+    <meta property="og:image" content="http://joomy.korkutblech.com/assets/icon.png" />
+    
+      <meta property="og:description" content="Tracing the origin of the terms " intrinsic" and "extrinsic" in formal verification and programming languages.">
+    
+    <meta property="og:site_name" content="Joomy Korkut" />
+    
+    <script src="../assets/page.js"></script>
+  </head>
+  <body>
+    <div class="header">
+  <section>
+    <h1 class="to-right"><a href="../">Home page</a> | <a href="javascript:history.back()">Back</a></h1>
+  </section>
+  <div class="title">
+    Joomy Korkut's blog
+  </div>
+  <div class="title">
+    <a href="../posts/2024-10-30-intrinsic-vs-extrinsic-verification.html">Intrinsic vs. extrinsic verification</a>
+  </div>
+  <div class="subtitle">
+      Posted on October 30, 2024,
+      
+        tags: <a href="../tags/history.html">history</a>, <a href="../tags/proof%20assistants.html">proof assistants</a>
+      
+  </div>
+</div>
+<div class="content">
+  <div class="gray">
+I wrote <a href="https://functional.cafe/@joomy/112484764331818587">a Mastodon post</a> about this topic a few months ago, but when this topic came up when I was at <a href="https://2024.splashcon.org/">SPLASH 2024</a> last week and I could not find my Mastodon post due to its unusable search feature (though to be fair searching in a federated setting is a tough problem), I decided to turn it into a quick, more permanent blog post I can easily find and share.
+</div>
+<hr>
+<p>I am writing a paper and I once again found myself explaining intrinsic vs. extrinsic style of verification in dependently typed programs. (intrinsic = proof baked into the program, extrinsic = program and proof written separately) I never know what to cite for this concept, so I decided to dig a bit deeper to find the origin of these terms.</p>
+<p>The first one that I found was John Reynolds’s 1998 book <a href="https://www.cs.cmu.edu/~jcr/tpl.html">Theories of Programming Languages</a>. In fact, in his 2004 paper <a href="https://tidsskrift.dk/brics/article/view/20167/17787">The Meaning of Types: From Intrinsic to Extrinsic Semantics</a>, he assures us that this book contains the first use of these terms by saying</p>
+<blockquote>
+<p>The terms ‘intrinsic’ and ‘extrinsic’ are recent coinages by the author[1, Chapter 15], but the concepts are much older. The intrinsic view is associated with Alonzo Church, and has been called ‘ontological’ by Leivant[2]. The extrinsic view is associated with Haskell Curry, and has been called ‘semantical’ by Leivant.</p>
+</blockquote>
+<p>At this point this is still a type theory discussion about how to define the semantics of a language.</p>
+<p>Another one I found was the paper by Benton, Hur, Kennedy and McBride from 2011, titled <a href="https://doi.org/10.1007/s10817-011-9219-0">Strongly Typed Term Representations in Coq</a>. They say in the abstract:</p>
+<blockquote>
+<p>There are two approaches to formalizing the syntax of typed object languages in a proof assistant or programming language. The extrinsic approach is to first define a type that encodes untyped object expressions and then make a separate definition of typing judgements over the untyped terms. The intrinsic approach is to make a single definition that captures well-typed object expressions, so ill-typed expressions cannot even be expressed.  </p>
+</blockquote>
+<p>This is now a discussion about mechanizing a language in proof assistants, which is closer to how I use it, but it’s still a type theory term at this point. It is referring to defining the terms of a language in a way that is well-typed by construction.</p>
+<p>Another paper worth mentioning is by Affeldt and Sakaguchi, from 2014, titled <a href="https://jfr.unibo.it/article/view/4317/3950">An Intrinsic Encoding of a Subset of C and its Application to TLS Network Packet Processing</a> They do, however, still use the term in the type theory sense, where they define C terms in an explicitly well-typed way. They also observe that</p>
+<blockquote>
+<p>An intrinsic encoding also helps when developing the verification framework because having to deal with only correctly-typed programs reduces the number of error cases to be treated when developing the semantics and the related lemmas.</p>
+</blockquote>
+<p>Right now the earliest paper I found that uses/contrasts the terms “intrinsic” vs. “extrinsic” outside of the type theory sense is the first paper I worked on when I was an undergrad. It is the 2016 paper <a href="https://joomy.korkutblech.com/papers/regexp2016.pdf">Intrinsic Verification of a Regular Expression Matcher</a>, where we explain this dichotomy (or rather, spectrum) for any program, and not just programming language interpreters. However, I remember getting the impression from <a href="https://dlicata.wescreates.wesleyan.edu/">my advisor at the time</a> that this was folklore, so I think there must be some other paper out there that uses these terms in a general program verification way. Or maybe this isn’t even a meaningful distinction? Any ideas?</p>
+</div>
+
+  </body>
+</html>
