@@ -74,6 +74,24 @@ I wrote <a href="https://functional.cafe/@joomy/112484764331818587">a Mastodon p
 <p>An intrinsic encoding also helps when developing the verification framework because having to deal with only correctly-typed programs reduces the number of error cases to be treated when developing the semantics and the related lemmas.</p>
 </blockquote>
 <p>Right now the earliest paper I found that uses/contrasts the terms “intrinsic” vs. “extrinsic” outside of the type theory sense is the first paper I worked on when I was an undergrad. It is the 2016 paper <a href="https://joomy.korkutblech.com/papers/regexp2016.pdf">Intrinsic Verification of a Regular Expression Matcher</a>, where we explain this dichotomy (or rather, spectrum) for any program, and not just programming language interpreters. However, I remember getting the impression from <a href="https://dlicata.wescreates.wesleyan.edu/">my advisor at the time</a> that this was folklore, so I think there must be some other paper out there that uses these terms in a general program verification way. Or maybe this isn’t even a meaningful distinction? Any ideas?</p>
+<p><strong>Update from Feb 10th, 2025:</strong> I found other earlier / contemporary uses, and other (later) significant uses of the intrinsic vs. extrinsic verification terminology that should be mentioned here. I will keep an updated list at the end of this blog post, so that everyone can refer to this page for the history of these terms.</p>
+<p>So here’s my current timeline of the use of this terminology that is program verification and not for type theory:</p>
+<ul>
+<li>2013: <a href="https://sympa.inria.fr/sympa/arc/coq-club/2013-11/msg00183.html">Coq-Club e-mail by Abhishek Anand</a></li>
+<li>January 2016: <a href="https://joomy.korkutblech.com/papers/regexp2016.pdf">Intrinsic verification of a regular expression matcher. Korkut, Trifunovski, Licata.</a></li>
+<li>July 2016: <a href="https://firsov.ee/phd/thesis.pdf">Certification of context-free grammar algorithms. Firsov.</a></li>
+<li>2017: <a href="https://doi.org/10.1145/3156695.3122963">A tale of two provers: verifying monoidal string matching in Liquid Haskell and Coq. Vazou et al.</a></li>
+<li>2020: <a href="https://doi.org/10.1016/j.scico.2020.102440">Programming language foundations in Agda</a></li>
+<li>2022: <a href="https://doi.org/10.1145/3546189.3549920">Reasonable Agda is correct Haskell: writing verified Haskell using agda2hs</a></li>
+<li>2023: <a href="https://mitpress.mit.edu/9780262546232/program-proofs/">Program Proofs. Leino.</a></li>
+<li>2025: <a href="https://doi.org/10.1145/3703595.3705873">Intrinsically correct sorting in Cubical Agda. Alexandru et al.</a></li>
+</ul>
+<p>Please let me know <script type="text/javascript">
+<!--
+h='&#116;&#x79;&#112;&#x65;&#46;&#x73;&#x79;&#x73;&#116;&#x65;&#x6d;&#x73;';a='&#64;';n='&#106;&#x6f;&#x6f;&#x6d;&#x79;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+'&#98;&#x79;&#32;&#x65;&#x6d;&#x61;&#x69;&#108;'+'<\/'+'a'+'>');
+// -->
+</script><noscript>by email (joomy at type dot systems)</noscript> if you have an earlier use of this term for program verification. (Though note that some earlier uses might be primarily for type theory.)</p>
 </div>
 
   </body>
