@@ -8,8 +8,16 @@
         <name>Joomy Korkut</name>
         <email>joomy@type.systems</email>
     </author>
-    <updated>2024-10-30T00:00:00Z</updated>
+    <updated>2025-11-23T00:00:00Z</updated>
     <entry>
+    <title>Why I refuse to learn type-level programming in Haskell</title>
+    <link href="http://joomy.korkutblech.com/posts/2025-11-23-why-i-refuse.html" />
+    <id>http://joomy.korkutblech.com/posts/2025-11-23-why-i-refuse.html</id>
+    <published>2025-11-23T00:00:00Z</published>
+    <updated>2025-11-23T00:00:00Z</updated>
+    <summary type="html"><![CDATA[A short essay about why I refuse to learn complex language features like type-level programming in Haskell and first-class modules in OCaml.]]></summary>
+</entry>
+<entry>
     <title>Intrinsic vs. extrinsic verification</title>
     <link href="http://joomy.korkutblech.com/posts/2024-10-30-intrinsic-vs-extrinsic-verification.html" />
     <id>http://joomy.korkutblech.com/posts/2024-10-30-intrinsic-vs-extrinsic-verification.html</id>
@@ -80,14 +88,6 @@
     <published>2014-11-30T00:00:00Z</published>
     <updated>2014-11-30T00:00:00Z</updated>
     <summary type="html"><![CDATA[I translated a couple of famous Turkish poems to English. It turns out that translation is fun and tough. I'll also ramble a bit about adaptation to the US.]]></summary>
-</entry>
-<entry>
-    <title>Hakyll seems awesome</title>
-    <link href="http://joomy.korkutblech.com/posts/2014-11-22-new-blog.html" />
-    <id>http://joomy.korkutblech.com/posts/2014-11-22-new-blog.html</id>
-    <published>2014-11-22T00:00:00Z</published>
-    <updated>2014-11-22T00:00:00Z</updated>
-    <summary type="html"><![CDATA[I started a blog with Hakyll.]]></summary>
 </entry>
 
 </feed>

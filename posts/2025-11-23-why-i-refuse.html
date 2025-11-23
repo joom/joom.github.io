@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Joomy Korkut - Why I refuse to learn type-level programming in Haskell</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="joomy,cumhur,korkut,haskell,coq,agda,idris,wesleyan,princeton,metaprogramming,compiler,formal,verification,verified,certified,programming,bloomberg,turkish,turkey" />
+    <link rel="stylesheet" type="text/css" href="../assets/style.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/syntax.css" />
+    <link rel="icon" href="../assets/favicon.ico">
+    <link rel="alternate" type="application/rss+xml" title="Joomy's web site and blog" href="http://joomy.korkutblech.com/atom.xml" />
+    <meta name="author" content="Joomy Korkut">
+    <meta name="description" content="Joomy's web site and blog." />
+    <!-- Schema.org markup for Google+ -->
+    <meta itemprop="name" content="Joomy Korkut">
+    
+      <meta itemprop="description" content="A short essay about why I refuse to learn complex language features like type-level programming in Haskell and first-class modules in OCaml.">
+    
+    <meta itemprop="image" content="/assets/icon.png">
+
+    <!-- Open Graph data -->
+    <meta property="og:title" content="Why I refuse to learn type-level programming in Haskell" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="http://joomy.korkutblech.com/" />
+    <meta property="og:image" content="http://joomy.korkutblech.com/assets/icon.png" />
+    
+      <meta property="og:description" content="A short essay about why I refuse to learn complex language features like type-level programming in Haskell and first-class modules in OCaml.">
+    
+    <meta property="og:site_name" content="Joomy Korkut" />
+    
+    <script src="../assets/page.js"></script>
+  </head>
+  <body>
+    <div class="header">
+  <section>
+    <h1 class="to-right"><a href="../">Home page</a> | <a href="javascript:history.back()">Back</a></h1>
+  </section>
+  <div class="title">
+    Joomy Korkut's blog
+  </div>
+  <div class="title">
+    <a href="../posts/2025-11-23-why-i-refuse.html">Why I refuse to learn type-level programming in Haskell</a>
+  </div>
+  
+    <div class="subtitle">
+      A short essay about why I refuse to learn complex language features like type-level programming in Haskell and first-class modules in OCaml.
+    </div>
+  
+  <div class="subsubtitle">
+      Posted on November 23, 2025,
+      
+        tags: <a href="../tags/haskell.html">haskell</a>, <a href="../tags/ocaml.html">ocaml</a>
+      
+  </div>
+</div>
+<div class="content">
+  <p>Haskell, as it was for many, was my “gateway drug” into programming language theory. As I became accustomed to the ways I can express more of my program in the types and <a href="https://blog.janestreet.com/effective-ml-revisited/">make illegal states unrepresentable</a>, I started dabbling in <a href="https://blog.ocharles.org.uk/pages/2014-12-01-24-days-of-ghc-extensions.html">many different extensions of GHC</a>. At this point, I had seen code using some of the most advanced features, libraries, and use cases of Haskell, such as the <a href="https://hackage.haskell.org/package/singletons">singletons</a> library, but I had barely written anything that went that far.</p>
+<p>Soon after, I started learning <a href="https://agda.readthedocs.io/">Agda</a> and <a href="https://rocq-prover.org/">Rocq</a> and realized that a lot of what Haskell type-level wizardry is trying to achieve is a lot easier to reach in these languages. This will be obvious to many, but here’s a quick list of how things are easier in the dependently typed setting (mostly Rocq since I know it better than Agda or Lean):</p>
+<ul>
+<li>No need for Haskell’s <code>DataKinds</code>. You can already use values in types in Rocq.</li>
+<li>No need for Haskell’s <code>TypeApplications</code>. You can always use <code>@</code> in Rocq before a type or function to apply types and implicit arguments explicitly. e.g. <code>cons true nil</code> can be <code>@cons bool true (@nil bool)</code>.</li>
+<li>Rocq already has type classes, but they’re essentially records with some instance search mechanism (for which Rocq’s proof search and hint system is used). A one parameter type class is just a record that is parametrized by a <code>Type</code> in Rocq.</li>
+<li>No need for Haskell’s <code>MultiParamTypeClasses</code>. It’s just a record that is parametrized by multiple types in Rocq, which is fair game.</li>
+<li>No need for Haskell’s <code>ImplicitParams</code>. Implicit parameters are already supported and used heavily (especially for simple parametric polymorphism) in Rocq.</li>
+<li>No need for Haskell’s <code>ConstraintKinds</code>. For type class constraints, <code>Type</code> suffices, since records are just types (or <code>Prop</code> or whatever sort you pick). Equality constraints can also be <code>Type</code> since <code>x = y</code> is of sort <code>Prop</code> (for some <code>x</code> and <code>y</code>).</li>
+<li>No need for Haskell’s <code>TypeSynonymInstances</code>, since type classes are just record types, and you can define type aliases with simple <code>Definition</code>s.</li>
+<li>No need for Haskell’s <code>FlexibleInstances</code>. An instance is a record with a particular type, which may be parametrized or indexed by anything (if the type requires it).</li>
+<li>No need for Haskell’s <code>FlexibleContexts</code>. An instance (i.e. a record) can take any other instance (i.e. record) argument. Rocq type classes don’t check for cycles, but you can break unexpected cycles by providing explicit parameters and instance names at edit-time.</li>
+<li>No need for Haskell’s <code>IncoherentInstances</code> or <code>UndecidableInstances</code>. You can always explicitly pass which instance you want.</li>
+<li>No need for Haskell’s <code>GADTs</code>. Parameters and indices of inductive types already subsume them.</li>
+<li>No need for Haskell’s <code>ScopedTypeVariables</code>. Type variables are just like any other argument. If the inner helper function does not parametrize over a type <code>A</code> that the outer function parametrizes on, the inner type <code>A</code> will be the same as the outer <code>A</code>.</li>
+</ul>
+<p>(Now, there are a bunch of extension that don’t have a Rocq equivalent, I admit that. <code>ViewPatterns</code>, any kind of deriving mechanism or extension, <code>TypeFamilies</code> [because <a href="https://stackoverflow.com/questions/23220884/why-is-typecase-a-bad-thing">type-case is not allowed in Rocq</a>, though it is <a href="https://gist.github.com/edwinb/25cd0449aab932bdf49456d426960fed">allowed in Idris 2</a>], <code>PatternSynonyms</code>, etc.)</p>
+<p>To cut a long story short, I can’t bring myself to learn how to use all these extensions effectively, when I know how simple it is to achieve the same results with dependent types, which enable first-class treatment of type quantification and type classes. I do not want to spend my time learning them when I know that Haskell’s type system is like a patchwork of extensions that <a href="https://knowyourmeme.com/memes/look-what-they-need-to-mimic-a-fraction-of-our-power">try to achieve a fraction of what can be done</a> with dependent types. When you do away with the type / term / module-level distinction, life just becomes simpler, purer, cleaner, and more worth living (thanks <a href="https://www.theguardian.com/culture/2015/feb/01/stephen-fry-god-evil-maniac-irish-tv">Stephen Fry</a>). Whatever code I write with such a complex system, will probably bitrot faster than simple code I will write in these languages. If nothing else, it will be inaccessible to the next developer, or to me, a month after I write it. Whatever paper or blog post I write about such complex code, will be of little value to the programming languages community. Yes, I managed to do this hack this time through blood, sweat, and tears. But why didn’t I use a language that didn’t actively make my job harder at each step?</p>
+<p>I can make the same argument for OCaml’s complicated module system with first-class modules, <a href="https://gist.github.com/EduardoRFS/3c9f1c8a92c090db6907e6a2f76963a2">with whom one can do dependent types shenanigans</a>. Rocq’s module system isn’t the best example there but <a href="https://agda.readthedocs.io/en/latest/language/module-system.html">Agda’s module system</a> is certainly worth looking at, as it makes the module/term-level distinction blurrier. There is already work in literature [<a href="https://dl.acm.org/doi/10.1145/44501.45065">1</a>, <a href="https://dl.acm.org/doi/10.1145/1708016.1708028">2</a>] about how module-level can be done away with.</p>
+<p>I admit, Rocq and Agda will probably never be a mainstream programming language like Haskell (Yes, yes, I know. Haskell is currently <a href="https://www.tiobe.com/tiobe-index/">34th on the TIOBE index</a>, okay?), but some other language may be. These days, <a href="https://lean-lang.org/">Lean</a> is increasingly looking like it will be the first dependently-typed, somewhat mainstream programming language. But who knows, <a href="https://ghc.serokell.io/dh">maybe Haskell will beat it and have dependent types</a> soon. (for some definition of soon) And yes, I admit, I have the privilege of writing Rocq and C++ for a living these days (did you notice how I carefully left out making the same argument for C++ templates? They’re even worse in terms of what kind of mischief they allow!) But as long as I am not paid to perform this kind of type or module-level wizardry, I have little interest in getting into it myself.</p>
+</div>
+
+  </body>
+</html>
