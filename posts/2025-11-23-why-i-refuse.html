@@ -55,20 +55,281 @@
 </div>
 <div class="content">
   <p>Haskell, as it was for many, was my “gateway drug” into programming language theory. As I became accustomed to the ways I can express more of my program in the types and <a href="https://blog.janestreet.com/effective-ml-revisited/">make illegal states unrepresentable</a>, I started dabbling in <a href="https://blog.ocharles.org.uk/pages/2014-12-01-24-days-of-ghc-extensions.html">many different extensions of GHC</a>. At this point, I had seen code using some of the most advanced features, libraries, and use cases of Haskell, such as the <a href="https://hackage.haskell.org/package/singletons">singletons</a> library, but I had barely written anything that went that far.</p>
-<p>Soon after, I started learning <a href="https://agda.readthedocs.io/">Agda</a> and <a href="https://rocq-prover.org/">Rocq</a> and realized that a lot of what Haskell type-level wizardry is trying to achieve is a lot easier to reach in these languages. This will be obvious to many, but here’s a quick list of how things are easier in the dependently typed setting (mostly Rocq since I know it better than Agda or Lean):</p>
+<p>Soon after I started learning <a href="https://agda.readthedocs.io/">Agda</a> and <a href="https://rocq-prover.org/">Rocq</a>, I realized that a lot of what Haskell type-level wizardry is trying to do is a lot easier to achieve in these languages. This will be obvious to many, but here’s a quick list of how things are easier in the dependently typed setting (mostly Rocq since I know it better than Agda or Lean):</p>
 <ul>
-<li>No need for Haskell’s <code>DataKinds</code>. You can already use values in types in Rocq.</li>
+<li>No need for Haskell’s <code>DataKinds</code>: You can already use values in types in Rocq.</li>
+<li>No need for Haskell’s <code>GADTs</code>: parameters and indices of inductive types already subsume them.</li>
+<li>No need for Haskell’s <code>KindSignatures</code>: They are just type annotations on parameters and indices of inductive types.</li>
+</ul>
+<div class="code-pair">
+<div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE DataKinds #-}</span>
+<span class="ot">{-# LANGUAGE GADTs #-}</span>
+<span class="ot">{-# LANGUAGE KindSignatures #-}</span>
+
+<span class="kw">data</span> <span class="dt">Status</span> <span class="fu">=</span> <span class="dt">Open</span> <span class="fu">|</span> <span class="dt">Closed</span>
+
+<span class="co">-- With DataKinds, Status is also a kind,</span>
+<span class="co">-- and Open/Closed are type-level constructors.</span>
+<span class="kw">data</span> <span class="dt">Door</span> (<span class="ot">s ::</span> <span class="dt">Status</span>) <span class="kw">where</span>
+  <span class="dt">MkOpen</span><span class="ot">   ::</span> <span class="dt">Door</span> <span class="ch">'Open</span>
+  <span class="dt">MkClosed</span><span class="ot"> ::</span> <span class="dt">Door</span> <span class="ch">'Closed</span>
+
+<span class="ot">closeDoor ::</span> <span class="dt">Door</span> <span class="ch">'Open -&gt; Door '</span><span class="dt">Closed</span>
+closeDoor <span class="dt">MkOpen</span> <span class="fu">=</span> <span class="dt">MkClosed</span></code></pre></div>
+</div>
+<div>
+<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="dt">Inductive</span> status : <span class="dt">Type</span> :=
+| <span class="dt">Open</span>
+| Closed<span class="kw">.</span>
+
+<span class="co">(* status is just a normal type of values,</span>
+<span class="co">   and we can index by those values directly. *)</span>
+<span class="dt">Inductive</span> door : status -&gt; <span class="dt">Type</span> :=
+| <span class="dt">MkOpen</span>  : door <span class="dt">Open</span>
+| <span class="dt">MkClosed</span> : door Closed<span class="kw">.</span>
+
+<span class="dt">Definition</span> close_door (d : door <span class="dt">Open</span>) : door <span class="dt">Closed</span> :=
+  <span class="kw">match</span> d <span class="kw">with</span>
+  | <span class="dt">MkOpen</span> =&gt; <span class="dt">MkClosed</span>
+  end.</code></pre></div>
+</div>
+</div>
+<ul>
 <li>No need for Haskell’s <code>TypeApplications</code>. You can always use <code>@</code> in Rocq before a type or function to apply types and implicit arguments explicitly. e.g. <code>cons true nil</code> can be <code>@cons bool true (@nil bool)</code>.</li>
-<li>Rocq already has type classes, but they’re essentially records with some instance search mechanism (for which Rocq’s proof search and hint system is used). A one-parameter type class is just a record that is parametrized by a <code>Type</code> in Rocq.</li>
-<li>No need for Haskell’s <code>MultiParamTypeClasses</code>. It’s just a record that is parametrized by multiple types in Rocq, which is fair game.</li>
-<li>No need for Haskell’s <code>ImplicitParams</code>. Implicit parameters are already supported and used heavily (especially for simple parametric polymorphism) in Rocq.</li>
-<li>No need for Haskell’s <code>ConstraintKinds</code>. For type class constraints, <code>Type</code> suffices, since records are just types (or <code>Prop</code> or whatever sort you pick). Equality constraints can also be <code>Type</code> since <code>x = y</code> is of sort <code>Prop</code> (for some <code>x</code> and <code>y</code>).</li>
-<li>No need for Haskell’s <code>TypeSynonymInstances</code>, since type classes are just record types, and you can define type aliases with simple <code>Definition</code>s.</li>
-<li>No need for Haskell’s <code>FlexibleInstances</code>. An instance is a record with a particular type, which may be parametrized or indexed by anything (if the type requires it).</li>
-<li>No need for Haskell’s <code>FlexibleContexts</code>. An instance (i.e., a record) can take any other instance (i.e., record) argument. Rocq type classes don’t check for cycles, but you can break unexpected cycles by providing explicit parameters and instance names at edit time.</li>
-<li>No need for Haskell’s <code>IncoherentInstances</code> or <code>UndecidableInstances</code>. You can always explicitly pass which instance you want.</li>
-<li>No need for Haskell’s <code>GADTs</code>. Parameters and indices of inductive types already subsume them.</li>
 <li>No need for Haskell’s <code>ScopedTypeVariables</code>. Type variables are just like any other argument. If the inner helper function does not parametrize over a type <code>A</code> that the outer function parametrizes on, the inner type <code>A</code> will be the same as the outer <code>A</code>.</li>
+</ul>
+<div class="code-pair">
+<div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE ScopedTypeVariables   #-}</span>
+<span class="ot">{-# LANGUAGE TypeApplications      #-}</span>
+
+<span class="ot">foo ::</span> forall a<span class="fu">.</span> [a] <span class="ot">-&gt;</span> a
+foo xs <span class="fu">=</span> headOrDefault xs
+  <span class="kw">where</span>
+    <span class="co">-- This 'a' refers to the *same* 'a as in foo's type.</span>
+<span class="ot">    def ::</span> a
+    def <span class="fu">=</span> error <span class="st">&quot;empty list&quot;</span>
+
+<span class="ot">    headOrDefault ::</span> [a] <span class="ot">-&gt;</span> a
+    headOrDefault []    <span class="fu">=</span> def
+    headOrDefault (y<span class="fu">:</span>_) <span class="fu">=</span> y
+
+<span class="co">--  We use TypeApplications to fix 'a' to Int explicitly</span>
+<span class="ot">example ::</span> <span class="dt">Int</span>
+example <span class="fu">=</span> foo <span class="fu">@</span><span class="dt">Int</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</code></pre></div>
+</div>
+<div>
+<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="dt">From</span> <span class="dt">Stdlib</span> <span class="dt">Require</span> <span class="dt">Import</span> List<span class="kw">.</span>
+<span class="dt">Import</span> ListNotations<span class="kw">.</span>
+
+<span class="dt">Definition</span> foo {<span class="dt">A</span> : <span class="dt">Type</span>} (xs : <span class="dt">list</span> <span class="dt">A</span>) : <span class="dt">option</span> <span class="dt">A</span> :=
+  <span class="co">(* Inner definitions see the same A automatically. *)</span>
+  <span class="kw">let</span> default : <span class="dt">option</span> <span class="dt">A</span> := <span class="dt">None</span> <span class="kw">in</span>
+  <span class="kw">let</span> head_or_default (ys : <span class="dt">list</span> <span class="dt">A</span>) : <span class="dt">option</span> <span class="dt">A</span> :=
+      <span class="kw">match</span> ys <span class="kw">with</span>
+      | [] =&gt; default
+      | x :: _ =&gt; <span class="dt">Some</span> x
+      end
+  <span class="kw">in</span>
+  head_or_default xs.
+
+<span class="co">(* Here we use @foo nat ... </span>
+<span class="co">   to explicitly apply the type argument. *)</span>
+<span class="dt">Definition</span> example : <span class="dt">option</span> nat :=
+  @foo nat [<span class="dv">1</span>; <span class="dv">2</span>; <span class="dv">3</span>].</code></pre></div>
+</div>
+</div>
+<ul>
+<li>Rocq already has type classes, but they’re essentially records with some instance search mechanism (for which Rocq’s proof search and hint system is used). A one-parameter type class is just a record that is parametrized by a <code>Type</code> in Rocq.</li>
+<li>No need for Haskell’s <code>ConstraintKinds</code>. For type class constraints, <code>Type</code> suffices, since records are just types (or <code>Prop</code> or whatever sort you pick). Equality constraints can also be <code>Type</code> since <code>x = y</code> is of sort <code>Prop</code> (for some <code>x</code> and <code>y</code>).</li>
+</ul>
+<div class="code-pair">
+<div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE ConstraintKinds #-}</span>
+
+<span class="kw">import </span><span class="dt">Data.Kind</span> (<span class="dt">Constraint</span>)
+
+<span class="kw">type</span> <span class="dt">EqShow</span> a <span class="fu">=</span> (<span class="dt">Eq</span> a, <span class="dt">Show</span> a)<span class="ot"> ::</span> <span class="dt">Constraint</span>
+
+<span class="ot">describe ::</span> <span class="dt">EqShow</span> a <span class="ot">=&gt;</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">String</span>
+describe x y <span class="fu">=</span>
+  <span class="kw">if</span> x <span class="fu">==</span> y
+     <span class="kw">then</span> <span class="st">&quot;same: &quot;</span> <span class="fu">++</span> show x
+     <span class="kw">else</span> <span class="st">&quot;different: &quot;</span> <span class="fu">++</span> show x <span class="fu">++</span> <span class="st">&quot; vs &quot;</span> <span class="fu">++</span> show y</code></pre></div>
+</div>
+<div>
+<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="dt">From</span> <span class="dt">Stdlib</span> <span class="dt">Require</span> <span class="dt">Import</span> String<span class="kw">.</span>
+<span class="dt">Open</span> <span class="dt">Scope</span> string_scope.
+
+<span class="dt">Class</span> <span class="dt">Eq</span> (<span class="dt">A</span> : <span class="dt">Type</span>) := { eqb : <span class="dt">A</span> -&gt; <span class="dt">A</span> -&gt; <span class="dt">bool</span> }.
+<span class="dt">Class</span> <span class="dt">Show</span> (<span class="dt">A</span> : <span class="dt">Type</span>) := { show : <span class="dt">A</span> -&gt; <span class="dt">string</span> }.
+
+<span class="co">(* Using the substructures feature of Rocq type classes: *)</span>
+<span class="dt">Class</span> <span class="dt">EqShow</span> (<span class="dt">A</span> : <span class="dt">Type</span>) :=
+  { <span class="dt">EqShow_Eq</span> :: <span class="dt">Eq</span> <span class="dt">A</span>
+  ; <span class="dt">EqShow_Show</span> :: <span class="dt">Show</span> <span class="dt">A</span>
+  }.
+
+<span class="dt">Definition</span> describe {<span class="dt">A</span> : <span class="dt">Type</span>} `{<span class="dt">EqShow</span> <span class="dt">A</span>} (x y : <span class="dt">A</span>) : <span class="dt">string</span> :=
+  <span class="kw">if</span> eqb x y
+  <span class="kw">then</span> <span class="st">&quot;same: &quot;</span> ++ show x
+  <span class="kw">else</span> <span class="st">&quot;different: &quot;</span> ++ show x ++ <span class="st">&quot; vs &quot;</span> ++ show y.</code></pre></div>
+</div>
+</div>
+<ul>
+<li>No need for Haskell’s <code>MultiParamTypeClasses</code>. It’s just a record that is parametrized by multiple types in Rocq, which is fair game.</li>
+</ul>
+<div class="code-pair">
+<div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE MultiParamTypeClasses #-}</span>
+
+<span class="co">-- A multi-parameter type class</span>
+<span class="kw">class</span> <span class="dt">Convert</span> a b <span class="kw">where</span>
+<span class="ot">  convert ::</span> a <span class="ot">-&gt;</span> b
+
+<span class="kw">instance</span> <span class="dt">Convert</span> <span class="dt">Bool</span> <span class="dt">Int</span> <span class="kw">where</span>
+  convert <span class="dt">True</span>  <span class="fu">=</span> <span class="dv">1</span>
+  convert <span class="dt">False</span> <span class="fu">=</span> <span class="dv">0</span></code></pre></div>
+</div>
+<div>
+<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="dt">Class</span> <span class="dt">Convert</span> (<span class="dt">A</span> <span class="dt">B</span> : <span class="dt">Type</span>) := { convert : <span class="dt">A</span> -&gt; <span class="dt">B</span> }.
+
+<span class="co">(* Using the substructures feature of Rocq type classes: *)</span>
+<span class="dt">Instance</span> <span class="dt">Convert_bool_nat</span> : <span class="dt">Convert</span> <span class="dt">bool</span> nat :=
+  {| convert b := <span class="kw">if</span> b <span class="kw">then</span> <span class="dv">1</span> <span class="kw">else</span> <span class="dv">0</span> |}.</code></pre></div>
+</div>
+</div>
+<ul>
+<li>No need for Haskell’s <code>FlexibleInstances</code>. An instance is a record with a particular type, which may be parametrized or indexed by anything (if the type requires it).</li>
+</ul>
+<div class="code-pair">
+<div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE FlexibleInstances #-}</span>
+
+<span class="kw">class</span> <span class="dt">MyClass</span> a
+
+<span class="kw">instance</span> <span class="dt">MyClass</span> (<span class="dt">Maybe</span> a)
+
+<span class="co">-- requires FlexibleInstances:</span>
+<span class="kw">instance</span> <span class="dt">MyClass</span> (<span class="dt">Maybe</span> <span class="dt">Int</span>)</code></pre></div>
+</div>
+<div>
+<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="dt">Class</span> <span class="dt">MyClass</span> (<span class="dt">A</span> : <span class="dt">Type</span>) := {}.
+
+<span class="dt">Instance</span> <span class="dt">MyClass_option</span> {<span class="dt">A</span> : <span class="dt">Type</span>} : <span class="dt">MyClass</span> (<span class="dt">option</span> <span class="dt">A</span>) := {}.
+
+<span class="dt">Instance</span> <span class="dt">MyClass_option_nat</span> : <span class="dt">MyClass</span> (<span class="dt">option</span> nat) := {}.</code></pre></div>
+</div>
+</div>
+<ul>
+<li>No need for Haskell’s <code>FlexibleContexts</code>. An instance (i.e., a record) can take any other instance (i.e., record) argument. Rocq type classes don’t check for cycles, but you can break unexpected cycles by providing explicit parameters and instance names at edit time.</li>
+</ul>
+<div class="code-pair">
+<div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE FlexibleContexts #-}</span>
+
+<span class="kw">class</span> <span class="dt">MyClass</span> a
+
+<span class="kw">instance</span> (<span class="dt">MyClass</span> a) <span class="ot">=&gt;</span> <span class="dt">MyClass</span> (<span class="dt">Either</span> a b)
+
+<span class="co">-- requires FlexibleContexts:</span>
+<span class="kw">instance</span> (<span class="dt">MyClass</span> (<span class="dt">Maybe</span> a)) <span class="ot">=&gt;</span> <span class="dt">MyClass</span> (<span class="dt">Either</span> a b)</code></pre></div>
+</div>
+<div>
+<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="dt">Class</span> <span class="dt">MyClass</span> (<span class="dt">A</span> : <span class="dt">Type</span>) := {}.
+
+<span class="dt">Instance</span> <span class="dt">MyClass_sum</span> {<span class="dt">A</span> <span class="dt">B</span> : <span class="dt">Type</span>}
+         `{<span class="dt">MyClass</span> <span class="dt">A</span>} : <span class="dt">MyClass</span> (<span class="dt">A</span> + <span class="dt">B</span>) := {}.
+
+<span class="dt">Instance</span> <span class="dt">MyClass_sum_option</span> {<span class="dt">A</span> <span class="dt">B</span> : <span class="dt">Type</span>}
+         `{<span class="dt">MyClass</span> (<span class="dt">option</span> <span class="dt">A</span>)} : <span class="dt">MyClass</span> (<span class="dt">A</span> + <span class="dt">B</span>) := {}.</code></pre></div>
+</div>
+</div>
+<ul>
+<li>No need for Haskell’s <code>IncoherentInstances</code> or <code>UndecidableInstances</code>. You can always explicitly pass which instance you want.</li>
+</ul>
+<div class="code-pair">
+<div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE FlexibleInstances    #-}</span>
+<span class="ot">{-# LANGUAGE IncoherentInstances  #-}</span>
+
+<span class="kw">class</span> <span class="dt">ToText</span> a <span class="kw">where</span>
+<span class="ot">  toText ::</span> a <span class="ot">-&gt;</span> <span class="dt">String</span>
+
+<span class="co">-- Very general fallback instance</span>
+<span class="kw">instance</span> <span class="dt">ToText</span> a <span class="kw">where</span>
+  toText _ <span class="fu">=</span> <span class="st">&quot;&lt;unknown&gt;&quot;</span>
+
+<span class="co">-- More specific instance for String</span>
+<span class="kw">instance</span> <span class="dt">ToText</span> <span class="dt">String</span> <span class="kw">where</span>
+  toText s <span class="fu">=</span> s</code></pre></div>
+</div>
+<div>
+<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="dt">From</span> <span class="dt">Stdlib</span> <span class="dt">Require</span> <span class="dt">Import</span> String<span class="kw">.</span>
+<span class="dt">Open</span> <span class="dt">Scope</span> string_scope.
+
+<span class="dt">Class</span> <span class="dt">ToText</span> (<span class="dt">A</span> : <span class="dt">Type</span>) := { to_text : <span class="dt">A</span> -&gt; <span class="dt">string</span> }.
+
+<span class="co">(* General “fallback” instance *)</span>
+<span class="dt">Instance</span> <span class="dt">ToText_default</span> {<span class="dt">A</span> : <span class="dt">Type</span>} : <span class="dt">ToText</span> <span class="dt">A</span> :=
+  {| to_text _ := <span class="st">&quot;&lt;unknown&gt;&quot;</span> |}.
+
+<span class="co">(* More specific instance for string *)</span>
+<span class="dt">Instance</span> <span class="dt">ToText_string</span> : <span class="dt">ToText</span> <span class="dt">string</span> :=
+  {| to_text s := s |}.
+
+<span class="co">(* Uses whatever instance search finds (probably ToText_string). *)</span>
+<span class="dt">Definition</span> print_auto (s : <span class="dt">string</span>) : <span class="dt">string</span> :=
+  to_text s.
+
+<span class="co">(* Explicitly choose the instance. *)</span>
+<span class="dt">Definition</span> print_as_unknown (s : <span class="dt">string</span>) : <span class="dt">string</span> :=
+  @to_text <span class="dt">string</span> <span class="dt">ToText_default</span> s.</code></pre></div>
+</div>
+</div>
+<ul>
+<li>No need for Haskell’s <code>AllowAmbiguousTypes</code>. Rocq already lets you to defer the ambiguity check to call sites, and you can resolve them by passing explicit instances.</li>
+</ul>
+<div class="code-pair">
+<div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">{-# LANGUAGE AllowAmbiguousTypes #-}</span>
+<span class="ot">{-# LANGUAGE TypeApplications    #-}</span>
+
+<span class="kw">class</span> <span class="dt">HasName</span> a <span class="kw">where</span>
+<span class="ot">  name ::</span> <span class="dt">String</span>
+
+<span class="ot">hello ::</span> forall a<span class="fu">.</span> <span class="dt">HasName</span> a <span class="ot">=&gt;</span> <span class="dt">String</span>
+hello <span class="fu">=</span> <span class="st">&quot;Hello, &quot;</span> <span class="fu">++</span> name <span class="fu">@</span>a
+
+<span class="kw">data</span> <span class="dt">User</span>
+<span class="kw">instance</span> <span class="dt">HasName</span> <span class="dt">User</span> <span class="kw">where</span>
+  name <span class="fu">=</span> <span class="st">&quot;User&quot;</span>
+
+<span class="ot">greetUser ::</span> <span class="dt">String</span>
+greetUser <span class="fu">=</span> hello <span class="fu">@</span><span class="dt">User</span></code></pre></div>
+</div>
+<div>
+<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="dt">From</span> <span class="dt">Stdlib</span> <span class="dt">Require</span> <span class="dt">Import</span> String<span class="kw">.</span>
+<span class="dt">Open</span> <span class="dt">Scope</span> string_scope.
+
+<span class="dt">Class</span> <span class="dt">HasName</span> (<span class="dt">A</span> : <span class="dt">Type</span>) := { name : <span class="dt">string</span> }.
+
+<span class="dt">Definition</span> hello {<span class="dt">A</span> : <span class="dt">Type</span>} `{<span class="dt">HasName</span> <span class="dt">A</span>} : <span class="dt">string</span> :=
+  <span class="st">&quot;Hello, &quot;</span> ++ name.
+
+<span class="dt">Inductive</span> <span class="dt">User</span> := mkUser.
+
+<span class="dt">Instance</span> <span class="dt">HasName_User</span> : <span class="dt">HasName</span> <span class="dt">User</span> :=
+  {| name := <span class="st">&quot;User&quot;</span> |}.
+
+<span class="dt">Definition</span> greet_user : <span class="dt">string</span> :=
+  @hello <span class="dt">User</span> HasName_User<span class="kw">.</span></code></pre></div>
+</div>
+</div>
+<ul>
+<li>No need for Haskell’s <code>TypeSynonymInstances</code>, since type classes are just record types, and you can define type aliases with simple <code>Definition</code>s.</li>
+<li>No need for Haskell’s <code>PartialTypeSignatures</code>. Rocq already allows omitting parts of types with <code>_</code>, and you will get an error if Rocq cannot figure out what the type should be.</li>
 </ul>
 <p>(Now, there are a bunch of extensions that don’t have a Rocq equivalent, I admit that. <code>ViewPatterns</code>, any kind of deriving mechanism or extension, <code>TypeFamilies</code> [because <a href="https://stackoverflow.com/questions/23220884/why-is-typecase-a-bad-thing">type-case is not allowed in Rocq</a>, though it is <a href="https://gist.github.com/edwinb/25cd0449aab932bdf49456d426960fed">allowed in Idris 2</a>], <code>PatternSynonyms</code>, etc.)</p>
 <p>To cut a long story short, I can’t bring myself to learn how to use all these extensions effectively, when I know how simple it is to achieve the same results with dependent types, which enable first-class treatment of type quantification and type classes. I do not want to spend my time learning them when I know that Haskell’s type system is like a patchwork of extensions that <a href="https://knowyourmeme.com/memes/look-what-they-need-to-mimic-a-fraction-of-our-power">try to achieve a fraction of what can be done</a> with dependent types. When you do away with the type/term/module-level distinction, life just becomes simpler, purer, cleaner, and more worth living (thanks <a href="https://www.theguardian.com/culture/2015/feb/01/stephen-fry-god-evil-maniac-irish-tv">Stephen Fry</a>). Whatever code I write with such a complex system will probably bitrot faster than simple code I will write in these languages. If nothing else, it will be inaccessible to the next developer, or to me, a month after I write it. Whatever paper or blog post I write about such complex code, will be of little value to the programming languages community. Yes, I managed to do this hack this time through blood, sweat, and tears. But why didn’t I use a language that didn’t actively make my job harder at each step?</p>
