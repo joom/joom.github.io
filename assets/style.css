@@ -212,7 +212,7 @@ blockquote {
     display: block;
   }
 
-  .code-pair > div {
-    border: 0;
-  }
+/*   .code-pair > div { */
+/*     border: 0; */
+/*   } */
 }
