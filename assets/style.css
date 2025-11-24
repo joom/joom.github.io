@@ -206,3 +206,13 @@ blockquote {
   margin: 10px;
   border: 1px solid black; 
 }
+
+@media (max-width: 600px) {
+  .code-pair {
+    display: block;
+  }
+
+  .code-pair > div {
+    border: 0;
+  }
+}
