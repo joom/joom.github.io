@@ -195,7 +195,6 @@ describe x y <span class="fu">=</span>
 <div>
 <div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="dt">Class</span> <span class="dt">Convert</span> (<span class="dt">A</span> <span class="dt">B</span> : <span class="dt">Type</span>) := { convert : <span class="dt">A</span> -&gt; <span class="dt">B</span> }.
 
-<span class="co">(* Using the substructures feature of Rocq type classes: *)</span>
 <span class="dt">Instance</span> <span class="dt">Convert_bool_nat</span> : <span class="dt">Convert</span> <span class="dt">bool</span> nat :=
   {| convert b := <span class="kw">if</span> b <span class="kw">then</span> <span class="dv">1</span> <span class="kw">else</span> <span class="dv">0</span> |}.</code></pre></div>
 </div>
