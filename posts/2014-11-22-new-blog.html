@@ -51,17 +51,31 @@
   <div class="subsubtitle">
       Posted on November 22, 2014,
       
-        tags: <a href="../tags/meta.html">meta</a>, <a href="../tags/haskell.html">haskell</a>
+        tags: <a title="All pages tagged 'meta'." href="../tags/meta.html" rel="tag">meta</a>, <a title="All pages tagged 'haskell'." href="../tags/haskell.html" rel="tag">haskell</a>
       
   </div>
 </div>
 <div class="content">
-  <p>I guess I never had a blog that I regularly kept writing, and I doubt this will ever be that, but I needed a place to keep my writings. Otherwise I was just going to use GitHub repositories for any kind of text, which is not much fun.</p>
-<p>Well, there is a fun part of it: <a href="http://en.wikipedia.org/wiki/Markdown">Markdown</a> is awesome. Since I needed a blog system that used Markdown, I looked into <a href="http://jekyllrb.com/">Jekyll</a> and <a href="http://jaspervdj.be/hakyll/">Hakyll</a>. Even though Jekyll was simpler to configure, I was beaten by my Haskell pride, which is why I spent a couple of hours trying to configure this blog in a way that I want. I’m pleased with the result I got.</p>
-<p>It’s time to show off the features of my configuration. I’m currently using <a href="http://disqus.com">Disqus</a> for comments and <a href="http://google.com/analytics">Google Analytics</a> to see how many people are visiting. If I write, this will be a programming blog, so it’s nice to have the syntax highlighting features like this:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">main ::</span> <span class="dt">IO</span> ()
-main <span class="fu">=</span> getLine <span class="fu">&gt;&gt;=</span> putStrLn</code></pre></div>
-<p>Thanks <a href="http://johnmacfarlane.net/pandoc/">Pandoc</a>! I can also use <a href="http://www.latex-project.org/">\(\LaTeX\)</a>, with the help of <a href="http://www.mathjax.org/">MathJax</a>:</p>
+  <p>I guess I never had a blog that I regularly kept writing, and I doubt this will
+ever be that, but I needed a place to keep my writings. Otherwise I was just
+going to use GitHub repositories for any kind of text, which is not much fun.</p>
+<p>Well, there is a fun part of it: <a href="http://en.wikipedia.org/wiki/Markdown">Markdown</a>
+is awesome. Since I needed a blog
+system that used Markdown, I looked into <a href="http://jekyllrb.com/">Jekyll</a>
+and <a href="http://jaspervdj.be/hakyll/">Hakyll</a>. Even though
+Jekyll was simpler to configure, I was beaten by my Haskell pride,
+which is why I spent a couple of hours trying to configure this blog
+in a way that I want. I’m pleased with the result I got.</p>
+<p>It’s time to show off the features of my configuration. I’m currently
+using <a href="http://disqus.com">Disqus</a> for comments and
+<a href="http://google.com/analytics">Google Analytics</a> to see how many people
+are visiting. If I write, this will be a programming blog, so it’s nice to have
+the syntax highlighting features like this:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ot">main ::</span> <span class="dt">IO</span> ()</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>main <span class="ot">=</span> <span class="fu">getLine</span> <span class="op">&gt;&gt;=</span> <span class="fu">putStrLn</span></span></code></pre></div>
+<p>Thanks <a href="http://johnmacfarlane.net/pandoc/">Pandoc</a>!
+I can also use <a href="http://www.latex-project.org/">\(\LaTeX\)</a>,
+with the help of <a href="http://www.mathjax.org/">MathJax</a>:</p>
 <p>\[ \mathbb{M}_P = T_P(\emptyset) \cup (T_P)^2(\emptyset) \cup (T_P)^3(\emptyset) \cup (T_P)^4(\emptyset) \]</p>
 <p>Sweet. Now, let’s hope I’ll have the time and patience to write an actual blog post.</p>
 <p>The blog source code is available <a href="http://github.com/cattheory/blog">here</a>.</p>
