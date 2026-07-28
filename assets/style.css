@@ -191,6 +191,66 @@ blockquote {
   color: #857769;
 }
 
+pre.sourceCode,
+.post-content pre {
+  --code-language: "Code";
+  position: relative;
+  box-sizing: border-box;
+  max-width: 100%;
+  margin: 1em 0;
+  padding: 26px 14px 12px;
+  border: 1px solid black;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+pre.sourceCode::before,
+.post-content pre::before {
+  content: var(--code-language);
+  position: absolute;
+  top: 6px;
+  left: 7px;
+  padding: 1px 4px;
+  border: 1px solid #857769;
+  border-radius: 2px;
+  color: #554b43;
+  background: white;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 7px;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+pre.sourceCode.coq {
+  --code-language: "Rocq";
+}
+
+pre.sourceCode.lean {
+  --code-language: "Lean";
+}
+
+pre.sourceCode.ocaml {
+  --code-language: "OCaml";
+}
+
+pre.sourceCode.haskell {
+  --code-language: "Haskell";
+}
+
+pre.sourceCode.idris {
+  --code-language: "Idris";
+}
+
+pre.sourceCode.prolog {
+  --code-language: "Prolog";
+}
+
+pre.text {
+  --code-language: "Output";
+}
+
 .code-pair {
   display: flex;
   flex-direction: row;
@@ -206,15 +266,14 @@ blockquote {
   box-sizing: border-box;
   min-width: 0;
   margin: 10px;
-  padding: 12px 14px;
   border: 1px solid black;
 }
 
 .code-pair pre {
+  height: 100%;
   max-width: 100%;
   margin: 0;
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
+  border: 0;
 }
 
 @media (max-width: 600px) {
