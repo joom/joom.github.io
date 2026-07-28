@@ -10,8 +10,16 @@
         <email>joomy@type.systems</email>
         
     </author>
-    <updated>2025-11-23T00:00:00Z</updated>
+    <updated>2026-07-28T00:00:00Z</updated>
     <entry>
+    <title>Why Rocq is better than Lean for program verification</title>
+    <link href="http://joomy.korkutblech.com/posts/2026-07-28-why-rocq-is-better.html" />
+    <id>http://joomy.korkutblech.com/posts/2026-07-28-why-rocq-is-better.html</id>
+    <published>2026-07-28T00:00:00Z</published>
+    <updated>2026-07-28T00:00:00Z</updated>
+    <summary type="html"><![CDATA[An essay on why I don't give in to the hype and switch to Lean for formal verification of programs.]]></summary>
+</entry>
+<entry>
     <title>Why I refuse to learn type-level programming in Haskell</title>
     <link href="http://joomy.korkutblech.com/posts/2025-11-23-why-i-refuse.html" />
     <id>http://joomy.korkutblech.com/posts/2025-11-23-why-i-refuse.html</id>
@@ -82,14 +90,6 @@
     <published>2014-12-05T00:00:00Z</published>
     <updated>2014-12-05T00:00:00Z</updated>
     <summary type="html"><![CDATA[I built a pseudo-Prolog that tries to answer queries by building the least Herbrand model, as a final project for a class. I chose to build it in Haskell to take advantage of lazy evaluations, but even then I couldn't handle infinite sets.]]></summary>
-</entry>
-<entry>
-    <title>Testing the waters with poetry translation</title>
-    <link href="http://joomy.korkutblech.com/posts/2014-11-30-turkish-poetry.html" />
-    <id>http://joomy.korkutblech.com/posts/2014-11-30-turkish-poetry.html</id>
-    <published>2014-11-30T00:00:00Z</published>
-    <updated>2014-11-30T00:00:00Z</updated>
-    <summary type="html"><![CDATA[I translated a couple of famous Turkish poems to English. It turns out that translation is fun and tough. I'll also ramble a bit about adaptation to the US.]]></summary>
 </entry>
 
 </feed>
