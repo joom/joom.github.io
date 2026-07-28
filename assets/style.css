@@ -203,8 +203,18 @@ blockquote {
   flex-direction: column;
   flex-basis: 100%;
   flex: 1;
+  box-sizing: border-box;
+  min-width: 0;
   margin: 10px;
-  border: 1px solid black; 
+  padding: 12px 14px;
+  border: 1px solid black;
+}
+
+.code-pair pre {
+  max-width: 100%;
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
 @media (max-width: 600px) {
